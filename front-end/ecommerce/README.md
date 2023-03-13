@@ -1,5 +1,3 @@
-# project5-shopping-bag-finished
-
 ## Project setup
 ```
 yarn install
