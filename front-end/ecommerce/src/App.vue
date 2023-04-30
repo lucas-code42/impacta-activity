@@ -2,7 +2,6 @@
   <div id="nav">
     <router-link to="/">Início</router-link> -
     <router-link to="/basket">Carrinho {{ this.productsInBag.length }}</router-link> - 
-    <router-link to="/product">product</router-link> 
   </div>
   <router-view/>
 </template>

@@ -32,7 +32,19 @@ def create_product():
     body = request.get_json()
     conn, cur = DbMySql().db_connect()
     try:
-        sql_query = f"""INSERT INTO estoque (quantidade, preco, descricao, foto_base64, produto) VALUES ('{body["quantidade"]}', {float(body["preco"])}, '{body["descricao"]}', '{body["foto"]}', '{body["produto"]}')"""
+        sql_query = f"""INSERT INTO estoque (
+            title, 
+            price, 
+            description, 
+            category, 
+            image
+        ) VALUES (
+            '{body["title"]}', 
+            {float(body["price"])}, 
+            '{body["description"]}', 
+            '{body["category"]}', 
+            '{body["image"]}'
+        )"""
         cur.execute(sql_query)
         conn.commit()
         body["msg"] = "Record inserted successfully"
@@ -60,5 +72,24 @@ def admin():
         return response
 
 
+@app.route("/admin/delete", methods=["DELETE"])
+def remove_product_by_id():
+    body = request.get_json()
+    conn, cur = DbMySql().db_connect()
+    try:
+        sql_query = f"""DELETE FROM estoque WHERE id={body["id"]};"""
+        cur.execute(sql_query)
+        conn.commit()
+        body["msg"] = "Record remove successfully"
+    except Exception as e:
+        print("error", e)
+        body["msg"] = "Could not remove data"
+    finally:
+        cur.close()
+        conn.close()
+        return body
+    
+
+
 if __name__ == "__main__":
-    app.run(port=8080)
+    app.run(port=8081)

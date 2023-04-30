@@ -29,19 +29,17 @@ export default createStore({
 
   actions: {
     loadProducts({ commit }) {
-      axios.get("http://127.0.0.1:8081/products")
+      axios.get("http://localhost:8081/products") // https://fakestoreapi.com/products
         .then(response => {
           commit('loadProducts', response.data)
         })
     },
-
 
     loadBag({ commit }) {      
       if (localStorage.getItem("productsInBag")) {
         commit('loadBag', JSON.parse(localStorage.getItem("productsInBag")));
       }
     },
-
 
     addToBag({ commit }, product) {
       commit('addToBag', product)

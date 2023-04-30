@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Basket from '../views/Basket.vue'
 import Product from '../views/Product.vue'
-import Admin from '../views/Admin.vue'
+import Create from '../views/Create.vue'
+import Delete from '../views/Delete.vue'
 
 const routes = [
   {
@@ -21,9 +22,15 @@ const routes = [
     component: Product
   },
   {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin
+    path: '/create',
+    name: 'Create',
+    component: Create
+  },
+
+  {
+    path: "/delete",
+    name: "Delete",
+    component: Delete
   },
 
 ]
