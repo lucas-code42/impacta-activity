@@ -88,6 +88,34 @@ def remove_product_by_id():
         cur.close()
         conn.close()
         return body
+
+
+
+@app.route("/update/products", methods=["POST"])
+def update_product():
+    body = request.get_json()
+    conn, cur = DbMySql().db_connect()
+    print(body)
+    try:
+        sql_query =f"UPDATE estoque SET title = %s, price = %s, description = %s,	category = %s,	image = %s WHERE id = %s;"
+        val = (
+            body["title"],
+            float(body["price"]),
+            body["description"],
+            body["category"],
+            body["image"],
+            body["id"]
+        )
+        cur.execute(sql_query, val)
+        conn.commit()
+        body["msg"] = "Record inserted successfully"
+    except Exception as e:
+        print("error", e)
+        body["msg"] = "Record not inserted"
+    finally:
+        cur.close()
+        conn.close()
+        return body
     
 
 

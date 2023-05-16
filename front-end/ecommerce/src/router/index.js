@@ -4,6 +4,7 @@ import Basket from '../views/Basket.vue'
 import Product from '../views/Product.vue'
 import Create from '../views/Create.vue'
 import Delete from '../views/Delete.vue'
+import Update from '../views/Update.vue'
 
 const routes = [
   {
@@ -26,13 +27,16 @@ const routes = [
     name: 'Create',
     component: Create
   },
-
   {
     path: "/delete",
     name: "Delete",
     component: Delete
   },
-
+  {
+    path: "/update",
+    name: "Update",
+    component: Update
+  },
 ]
 
 const router = createRouter({
