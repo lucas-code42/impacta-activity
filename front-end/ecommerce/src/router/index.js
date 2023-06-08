@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Basket from '../views/Basket.vue'
-import Product from '../views/Product.vue'
 import Create from '../views/Create.vue'
 import Delete from '../views/Delete.vue'
 import Update from '../views/Update.vue'
+import Admin from '../views/Admin.vue'
 
 const routes = [
   {
@@ -16,11 +16,6 @@ const routes = [
     path: '/basket',
     name: 'Basket',
     component: Basket
-  },
-  {
-    path: '/product',
-    name: 'Product',
-    component: Product
   },
   {
     path: '/create',
@@ -36,6 +31,11 @@ const routes = [
     path: "/update",
     name: "Update",
     component: Update
+  },
+  {
+    path: "/admin-e8312685-4209-4773-969b-8f3587a6dac5",
+    name: "Admin",
+    component: Admin
   },
 ]
 

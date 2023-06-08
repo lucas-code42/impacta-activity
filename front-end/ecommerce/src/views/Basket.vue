@@ -1,7 +1,7 @@
 <template>
   <div class="basket">
     <div class="items">
-      
+
       <template v-if="productsInBag.length">
         <div v-for="(product, index) in productsInBag" :key="index" class="item">
           <div class="remove" @click="this.$store.dispatch('removeFromBag', product.id)">Remover Produto</div>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="grand-total"> Total do pedido: R$ {{ orderTotal() }}</div>
-        
+
       </template>
 
       <template v-else>
@@ -30,14 +30,23 @@
 
       </template>
 
+
+      <payment-form></payment-form>
+
+
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import PaymentForm from './PaymentForm.vue';
+
 
 export default {
+  components: {
+    PaymentForm
+  },
   name: 'Basket',
   computed: mapState(['productsInBag']),
   methods: {

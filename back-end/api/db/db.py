@@ -13,10 +13,13 @@ class DbMySql:
         cursor = None
 
         try:
-            connection = mysql.connector.connect(host=self.host,
-                                                 database=self.database,
-                                                 user=self.user,
-                                                 password=self.password)
+            connection = mysql.connector.connect(
+                host=self.host,
+                database=self.database,
+                user=self.user,
+                password=self.password
+            )
+
             if connection.is_connected():
                 db_info = connection.get_server_info()
                 print("Connected to MySQL Server version ", db_info)

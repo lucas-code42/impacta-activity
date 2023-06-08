@@ -1,18 +1,14 @@
-#!/usr/bin/env python3.10
+#!/usr/bin/env python>=3.10
 
 from flask import Flask
 from flask_cors import CORS
 from flask import request
-from flask import make_response
 from db.db import DbMySql
 from utils import format_database_response
 
 app = Flask(__name__)
 
 CORS(app)
-
-ADMIN = "root"
-SENHA = "root"
 
 
 @app.route("/products", methods=["GET"])
@@ -57,21 +53,6 @@ def create_product():
         return body
 
 
-@app.route("/admin", methods=["POST"])
-def admin():
-    body = request.get_json()
-    if body["admin"] == ADMIN and body["senha"] == SENHA:
-        default_body = {"message": "ok"}
-        response = make_response(default_body)
-        response.status_code = 200
-        return response
-    else:
-        default_body = {"message": "unauthorized"}
-        response = make_response(default_body)
-        response.status_code = 404
-        return response
-
-
 @app.route("/admin/delete", methods=["DELETE"])
 def remove_product_by_id():
     body = request.get_json()
@@ -90,14 +71,13 @@ def remove_product_by_id():
         return body
 
 
-
 @app.route("/update/products", methods=["POST"])
 def update_product():
     body = request.get_json()
     conn, cur = DbMySql().db_connect()
     print(body)
     try:
-        sql_query =f"UPDATE estoque SET title = %s, price = %s, description = %s,	category = %s,	image = %s WHERE id = %s;"
+        sql_query = f"UPDATE estoque SET title = %s, price = %s, description = %s,	category = %s,	image = %s WHERE id = %s;"
         val = (
             body["title"],
             float(body["price"]),
@@ -116,7 +96,12 @@ def update_product():
         cur.close()
         conn.close()
         return body
-    
+
+
+@app.route("/payment", methods=["POST"])
+def check_payment():
+    # todas as compras são aprovadas
+    return {"payment": False}
 
 
 if __name__ == "__main__":
